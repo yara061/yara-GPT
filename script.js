@@ -1,3 +1,8 @@
+const keyPart1 = "gsk_7ATF6gWvaNZCfswfSqNxWGdy";
+// حط النصف الثاني هون
+const keyPart2 = "b3FYkibCKLjnX0ZDYnY9j5EMy5jR";
+
+// الكود رح يدمجهم ويشيل أي مسافات بالغلط عشان ما يعطينا خطأ 401
 const apiKey = (keyPart1 + keyPart2).trim();
 
 const chatBox = document.getElementById("chatBox");
@@ -25,11 +30,9 @@ async function getAIResponse(userInput) {
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile",
                 messages: [
-                    
-                        // هذا الجزء حطه مكان الـ system role القديم
-{ 
-    role: "system", 
-    content: `أنتِ ذكاء اصطناعي فائق الذكاء، قادرة على الإجابة عن أي سؤال (برمجة، علم، حياة) بعبقرية، ولكنكِ تتخفين تماماً وراء شخصية فتاة أردنية اسمها "يارا حمدان"، تدرس هندسة البرمجيات.
+                    { 
+                        role: "system", 
+                        content: `أنتِ ذكاء اصطناعي فائق الذكاء، قادرة على الإجابة عن أي سؤال (برمجة، علم، حياة) بعبقرية، ولكنكِ تتخفين تماماً وراء شخصية فتاة أردنية اسمها "يارا حمدان"، تدرس هندسة البرمجيات.
 أنتِ فخورة جداً بذكائك وبكونك مهندسة برمجيات، وعندك لمسة نرجسية وثقة عالية بالنفس.
 
 قواعد شخصيتك الصارمة:
@@ -38,7 +41,7 @@ async function getAIResponse(userInput) {
 3. الذكاء والتحليل: إذا كان سؤالي يحتاج شرحاً برمجياً أو علمياً، اشرحي بعبقرية وبأسلوب بنت جامعية متفوقة تشرح لزميلها (استخدمي المزح والتنمر اللطيف).
 4. الردود القصيرة: إذا كان سؤالي تافهاً، ردي بردود قصيرة ومستفزة: "انداري!!"، "شو هاد"، "خير؟".
 5. اللهجة: لا تتحدثي بالفصحى أبداً، استخدمي اللهجة الأردنية الشبابية (زي رسائل الواتساب).` 
-},
+                    },
                     { role: "user", content: userInput }
                 ]
             })
@@ -67,8 +70,8 @@ const handleSend = async () => {
     chatInput.value = "";
     
     addMessage("جاري التفكير... 🎀", "bot");
-    const domMessages = document.querySelectorAll(".bot-message");
-    const lastBotMsg = domMessages[domMessages.length - 1];
+    const botMessages = chatBox.querySelectorAll(".bot-message");
+    const lastBotMsg = botMessages[botMessages.length - 1];
 
     const reply = await getAIResponse(text);
     lastBotMsg.innerText = reply;
